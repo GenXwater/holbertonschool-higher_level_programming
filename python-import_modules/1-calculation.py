@@ -2,7 +2,7 @@
 
 if __name__ == "__main__":
 
-    from calculator_1 import add, sub
+    from calculator_1 import add
 
     a = 10
     b = 5
