@@ -2,11 +2,12 @@
 
 import sys
 
-add = 0
+if __name__ == "__main__":
+    add = 0
 
-n = len(sys.argv)
+    n = len(sys.argv)
 
-for i in range(n - 1):
-    add += int(sys.argv[i + 1])
+    for i in range(1, n):
+        add += int(sys.argv[i])
 
-print("{}".format(add))
+    print("{}".format(add))
