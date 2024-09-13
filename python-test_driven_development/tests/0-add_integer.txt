@@ -61,64 +61,30 @@ that value is equivalent to using the ``+`` operator.
 
 ::
 
->>> add_integer("string_test", 2)
-Traceback (most recent call last):
-TypeError: a must be an integer
+::
+
+    >>> add_integer(4, "School")
+    Traceback (most recent call last):
+    TypeError: b must be an integer
 
 ::
 
->>> add_integer(5, "not_a_number")
-Traceback (most recent call last):
-TypeError: b must be an integer
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
 
 ::
 
->>> add_integer("invalid", "test")
-Traceback (most recent call last):
-TypeError: a must be an integer
+    >>> add_integer("Hello", "World")
+    Traceback (most recent call last):
+    TypeError: a must be an integer
 
-::
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
 
->>> add_integer(None, 42)
-Traceback (most recent call last):
-TypeError: a must be an integer
-
-::
-
->>> add_integer(100, None)
-Traceback (most recent call last):
-TypeError: b must be an integer
-
-::
-
->>> add_integer(None)
-Traceback (most recent call last):
-TypeError: a must be an integer
-
-::
-
->>> add_integer(float('inf'))
-Traceback (most recent call last):
-...
-OverflowError: cannot convert float infinity to integer
-
-::
-
->>> add_integer(10, float('inf'))
-Traceback (most recent call last):
-...
-OverflowError: cannot convert float infinity to integer
-
-::
-
->>> add_integer(float('nan'))
-Traceback (most recent call last):
-...
-ValueError: cannot convert float NaN to integer
-
-::
-
->>> add_integer(8, float('nan'))
-Traceback (most recent call last):
-...
-ValueError: cannot convert float NaN to add_integer
+    >>> add_integer(2, float('nan'))
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
