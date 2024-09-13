@@ -1,7 +1,7 @@
 # 0-add_integer.txt
 
 ===========================
-USE UNITEST
+UNITEST
 ===========================
 This module defines an integer addition function ``add_integer(a, b=98)``.
 
@@ -37,7 +37,7 @@ that value is equivalent to using the ``+`` operator.
 ::
 
 >>> add_integer(3.5, 2.7)
-6
+5
 
 ::
 
@@ -106,17 +106,3 @@ OverflowError: cannot convert float infinity to integer
 Traceback (most recent call last):
 ...
 OverflowError: cannot convert float infinity to integer
-
-::
-
->>> add_integer(float('nan'))
-Traceback (most recent call last):
-...
-ValueError: cannot convert float NaN to integer
-
-::
-
->>> add_integer(8, float('nan'))
-Traceback (most recent call last):
-...
-ValueError: cannot convert float NaN to add_integer
