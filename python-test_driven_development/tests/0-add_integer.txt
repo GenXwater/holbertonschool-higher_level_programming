@@ -1,104 +1,105 @@
+# 0-add_integer.txt
+
 >>> add_integer = __import__('0-add_integer').add_integer
 
+::
+
 >>> add_integer(5)
-103  # Puisque b = 98 par défaut, le résultat est 5 + 98
+103
 
 ::
 
 >>> add_integer(3, 7)
-10  # Addition simple de deux entiers
+10
 
 ::
 
 >>> add_integer(-10, 20)
-10  # Addition d'un entier négatif et d'un entier positif
+10
 
 ::
 
 >>> add_integer(0, -100)
--100  # Test avec 0 et un entier négatif
+-100
 
 ::
 
 >>> add_integer(3.5, 2.7)
-6  # Les flottants sont convertis en entiers avant l'addition
+6
 
 ::
 
 >>> add_integer(4.9, 98)
-102  # Le flottant 4.9 est converti en 4, additionné à 98
+102
 
 ::
 
 >>> add_integer(12, 0.99)
-12  # Le flottant 0.99 est converti en 0, donc 12 + 0 = 12
+12
 
 ::
 
 >>> add_integer(-1.9, 5)
-3  # Le flottant -1.9 est converti en -1, donc -1 + 5 = 4
+4
 
 ::
 
 >>> add_integer(0.1, -0.1)
-0  # Les flottants sont convertis en 0 avant l'addition
+0
 
 ::
 
 >>> add_integer("string_test", 2)
 Traceback (most recent call last):
-TypeError: a must be an integer  # Test avec une chaîne de caractères comme a
-
+TypeError: a must be an integer
 ::
 
 >>> add_integer(5, "not_a_number")
 Traceback (most recent call last):
-TypeError: b must be an integer  # Test avec une chaîne de caractères comme b
+TypeError: b must be an integer
 
 ::
 
 >>> add_integer("invalid", "test")
 Traceback (most recent call last):
-TypeError: a must be an integer  # Les deux paramètres sont des chaînes de caractères
+TypeError: a must be an integer
 
 ::
 
 >>> add_integer(None, 42)
 Traceback (most recent call last):
-TypeError: a must be an integer  # Test avec None en tant que premier paramètre
+TypeError: a must be an integer
 
 ::
 
 >>> add_integer(100, None)
 Traceback (most recent call last):
-TypeError: b must be an integer  # Test avec None en tant que second paramètre
+TypeError: b must be an integer
 
 ::
 
 >>> add_integer(None)
 Traceback (most recent call last):
-TypeError: a must be an integer  # Test avec None pour le seul paramètre
+TypeError: a must be an integer
 
 ::
 
 >>> add_integer(float('inf'))
 Traceback (most recent call last):
-OverflowError: cannot convert float infinity to integer  # Test avec la valeur float infini
-
-::
+OverflowError: cannot convert float infinity to integer
 
 >>> add_integer(10, float('inf'))
 Traceback (most recent call last):
-OverflowError: cannot convert float infinity to integer  # Test avec un entier et infini
+OverflowError: cannot convert float infinity to integer
 
 ::
 
 >>> add_integer(float('nan'))
 Traceback (most recent call last):
-ValueError: cannot convert float NaN to integer  # Test avec NaN comme premier paramètre
+ValueError: cannot convert float NaN to integer
 
 ::
 
 >>> add_integer(8, float('nan'))
 Traceback (most recent call last):
-ValueError: cannot convert float NaN to integer  # Test avec NaN comme second paramètre
+ValueError: cannot convert float NaN to add_integer
