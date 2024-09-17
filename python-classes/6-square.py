@@ -6,7 +6,8 @@ This module defines a class Square with size and position management.
 
 class Square:
     """
-    This class defines a square with a private instance attribute: size and position.
+    This class defines a square with a private instance
+    attribute: size and position.
     """
 
     def __init__(self, size=0, position=(0, 0)):
@@ -44,11 +45,12 @@ class Square:
     @position.setter
     def position(self, value):
         """
-        Setter for position. Validates that position is a tuple of 2 positive integers.
+        Setter for position. Validates that position is a tuple
+        of 2 positive integers.
         """
         if (not isinstance(value, tuple) or len(value) != 2 or
-            not all(isinstance(num, int) for num in value) or
-            not all(num >= 0 for num in value)):
+                not all(isinstance(num, int) for num in value) or
+                not all(num >= 0 for num in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
 
@@ -67,7 +69,7 @@ class Square:
             print()
             return
 
-        for jpycod in range(self.position[1]):
+        for j in range(self.position[1]):
             print()
 
         for i in range(self.size):
