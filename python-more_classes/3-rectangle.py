@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """
-This module defines a class Rectangle with size and position management.
+This module defines a class Rectangle with width and height management.
 """
 
 
 class Rectangle:
     """
     This class defines a Rectangle with a private instance
-    attribute: size and position.
+    attributes: width and height.
     """
 
     def __init__(self, width=0, height=0):
@@ -42,28 +42,36 @@ class Rectangle:
         return self.__width * self.__height
 
     def perimeter(self):
-        if self.__height == 0 or self.__width == 0:
+        """
+        Returns the perimeter of the rectangle.
+        If either width or height is 0, returns 0.
+        """
+        if self.__width == 0 or self.__height == 0:
             return 0
-        if self.__height < 0 or self.__width < 0:
-            return 0
-        return (self.__width + self.__height) * 2
+        return 2 * (self.__width + self.__height)
 
     def __str__(self):
+        """
+        Returns a string representation of the rectangle using '#'.
+        If width or height is 0, returns an empty string.
+        """
         if self.width == 0 or self.height == 0:
             return ""
 
         rect = ""
-
         for j in range(self.height):
             rect += "#" * self.width
-
             if j < self.height - 1:
                 rect += "\n"
-
         return rect
 
     def __repr__(self):
+        """
+        Returns a string representation of the rectangle
+        for debugging purposes in the form of:
+        <module_name.ClassName object at memory_address>
+        """
         return (
-            f"<{self.__class__.__module__}.{self.__class__.__name__}"
+            f"<{self.__class__.__module__}.{self.__class__.__name__} "
             f"object at {hex(id(self))}>"
         )
