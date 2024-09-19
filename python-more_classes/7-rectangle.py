@@ -65,7 +65,7 @@ class Rectangle:
         symbol = self.print_symbol
         if not isinstance(symbol, str):
             symbol = str(symbol)
-        
+
         for j in range(self.height):
             rect += symbol * self.width
             if j < self.height - 1:
