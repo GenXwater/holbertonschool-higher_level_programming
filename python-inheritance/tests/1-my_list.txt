@@ -13,7 +13,7 @@ Usage
 
 :: 
 
->>> my_list = __import__('my_list').MyList()
+>>> MyList = __import__('my_list').MyList
 
 :: 
 
