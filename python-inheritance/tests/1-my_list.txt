@@ -1,0 +1,62 @@
+# 1-my_list.txt
+
+===========================
+UNITEST
+===========================
+This module defines a class `MyList`, a subclass of the built-in `list`,
+that includes a method `print_sorted()`.
+
+Usage
+===========================
+`MyList` inherits from the `list` class and provides an additional method 
+`print_sorted()` that prints the list sorted in ascending order.
+
+:: 
+
+>>> my_list = __import__('my_list').MyList()
+
+:: 
+
+>>> my_list.append(3)
+>>> my_list.append(1)
+>>> my_list.append(2)
+
+:: 
+
+>>> my_list.print_sorted()
+[1, 2, 3]
+
+:: 
+
+>>> my_list.append(4)
+>>> my_list.print_sorted()
+[1, 2, 3, 4]
+
+:: 
+
+>>> my_list = __import__('my_list').MyList()
+>>> my_list.append(10)
+>>> my_list.append(-2)
+>>> my_list.append(5)
+>>> my_list.print_sorted()
+[-2, 5, 10]
+
+:: 
+
+>>> my_list = __import__('my_list').MyList()
+>>> my_list.print_sorted()
+[]
+
+:: 
+
+>>> my_list = __import__('my_list').MyList()
+>>> my_list.extend([5, 5, 5])
+>>> my_list.print_sorted()
+[5, 5, 5]
+
+:: 
+
+>>> my_list = __import__('my_list').MyList()
+>>> my_list.extend([-10, 100, 50, 0])
+>>> my_list.print_sorted()
+[-10, 0, 50, 100]
