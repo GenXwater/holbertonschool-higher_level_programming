@@ -1,62 +1,41 @@
-# 1-my_list.txt
+# Test cases for MyList class
+>>> MyList = __import__('1-my_list').MyList
 
-===========================
-UNITEST
-===========================
-This module defines a class `MyList`, a subclass of the built-in `list`,
-that includes a method `print_sorted()`.
-
-Usage
-===========================
-`MyList` inherits from the `list` class and provides an additional method 
-`print_sorted()` that prints the list sorted in ascending order.
-
-:: 
-
->>> MyList = __import__('my_list').MyList
-
-:: 
-
->>> my_list.append(3)
+# Test 1: Basic functionality
+>>> my_list = MyList()
 >>> my_list.append(1)
->>> my_list.append(2)
-
-:: 
-
->>> my_list.print_sorted()
-[1, 2, 3]
-
-:: 
-
 >>> my_list.append(4)
->>> my_list.print_sorted()
-[1, 2, 3, 4]
-
-:: 
-
->>> my_list = __import__('my_list').MyList()
->>> my_list.append(10)
->>> my_list.append(-2)
+>>> my_list.append(2)
+>>> my_list.append(3)
 >>> my_list.append(5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
 >>> my_list.print_sorted()
-[-2, 5, 10]
+[1, 2, 3, 4, 5]
+>>> print(my_list)
+[1, 4, 2, 3, 5]
 
-:: 
-
->>> my_list = __import__('my_list').MyList()
->>> my_list.print_sorted()
+# Test 2: Empty list
+>>> empty_list = MyList()
+>>> empty_list.print_sorted()
 []
 
-:: 
+# Test 3: List with negative numbers
+>>> neg_list = MyList()
+>>> neg_list.append(-1)
+>>> neg_list.append(-4)
+>>> neg_list.append(-2)
+>>> neg_list.append(-3)
+>>> neg_list.append(-5)
+>>> neg_list.print_sorted()
+[-5, -4, -3, -2, -1]
 
->>> my_list = __import__('my_list').MyList()
->>> my_list.extend([5, 5, 5])
->>> my_list.print_sorted()
-[5, 5, 5]
+# Test 4: List with duplicate numbers
+>>> dup_list = MyList([3, 3, 2, 2, 1, 1])
+>>> dup_list.print_sorted()
+[1, 1, 2, 2, 3, 3]
 
-:: 
-
->>> my_list = __import__('my_list').MyList()
->>> my_list.extend([-10, 100, 50, 0])
->>> my_list.print_sorted()
-[-10, 0, 50, 100]
+# Test 5: List with a single element
+>>> single_elem_list = MyList([42])
+>>> single_elem_list.print_sorted()
+[42]
