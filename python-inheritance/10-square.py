@@ -8,7 +8,7 @@ class Square(Rectangle):
     This class defines a square.
 
     A square is a special case of a rectangle where all sides are equal.
-    It inherits from the Rectangle class.
+    It inherits Rectangle class.
     """
 
     def __init__(self, size):
@@ -24,19 +24,3 @@ class Square(Rectangle):
         """
         super().__init__(size, size)
         self.__size = size
-
-    def area(self):
-        """
-        Calculate the area of the square.
-
-        Returns:
-            int: The area of the square.
-
-        This method overrides the area method from the Rectangle class,
-        although it produces the same result for a square.
-        """
-        return self.__size ** 2
-    
-    def __str__(self):
-        """Returns a string representation of a Rectangle object"""
-        return "[Rectangle] {}/{}".format(self.__size, self.__size)
