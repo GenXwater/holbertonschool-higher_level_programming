@@ -1,16 +1,18 @@
 #!/usr/bin/python3
-"""A class Rectangle that inherits from BaseGeometry (9-base_geometry.py)"""
+"""Module containing the Square class."""
 Rectangle = __import__('9-rectangle').Rectangle
 
 
 class Square(Rectangle):
-    """A class Square that inherits from Rectangle (9-rectangle.py)"""
+    """
+    This class defines a square.
+    """
 
     def __init__(self, size):
-        """Initializes a Rectangle object
+        """
+        Initialize a new Square instance.
         Args:
-            width: integer
-            height: integer
+            size (int): The size of the square's sides
         """
         super().__init__(size, size)
         self.__size = size
