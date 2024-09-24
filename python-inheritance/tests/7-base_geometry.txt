@@ -1,0 +1,67 @@
+# Test cases for BaseGeometry class
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+# Test instantiation
+>>> bg = BaseGeometry()
+>>> type(bg)
+<class '7-base_geometry.BaseGeometry'>
+
+# Test area method
+>>> try:
+...     bg.area()
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[Exception] area() is not implemented
+
+# Test integer_validator method with valid inputs
+>>> bg.integer_validator("my_int", 12)
+>>> bg.integer_validator("width", 89)
+
+# Test integer_validator method with invalid type
+>>> try:
+...     bg.integer_validator("name", "John")
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] name must be an integer
+
+# Test integer_validator method with float
+>>> try:
+...     bg.integer_validator("age", 17.5)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] age must be an integer
+
+# Test integer_validator method with negative value
+>>> try:
+...     bg.integer_validator("distance", -4)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] distance must be greater than 0
+
+# Test integer_validator method with zero
+>>> try:
+...     bg.integer_validator("year", 0)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] year must be greater than 0
+
+# Test integer_validator method with boolean
+>>> try:
+...     bg.integer_validator("valid", True)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] valid must be an integer
+
+# Test integer_validator method with None
+>>> try:
+...     bg.integer_validator("age", None)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] age must be an integer
+
+# Test integer_validator method without arguments
+>>> try:
+...     bg.integer_validator()
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[TypeError] BaseGeometry.integer_validator() missing 2 required positional arguments: 'name' and 'value'
