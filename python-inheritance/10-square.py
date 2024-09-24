@@ -36,3 +36,7 @@ class Square(Rectangle):
         although it produces the same result for a square.
         """
         return self.__size ** 2
+    
+    def __str__(self):
+        """Returns a string representation of a Rectangle object"""
+        return "[Rectangle] {}/{}".format(self.__size, self.__size)
