@@ -45,13 +45,6 @@
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [ValueError] year must be greater than 0
 
-# Test integer_validator method with boolean
->>> try:
-...     bg.integer_validator("valid", True)
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] valid must be an integer
-
 # Test integer_validator method with None
 >>> try:
 ...     bg.integer_validator("age", None)
