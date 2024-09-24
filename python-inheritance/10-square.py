@@ -26,4 +26,13 @@ class Square(Rectangle):
         self.__size = size
 
     def area(self):
+        """
+        Calculate the area of the square.
+
+        Returns:
+            int: The area of the square.
+
+        This method overrides the area method from the Rectangle class,
+        although it produces the same result for a square.
+        """
         return self.__size ** 2
