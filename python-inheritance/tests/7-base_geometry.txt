@@ -17,44 +17,61 @@
 >>> bg.integer_validator("my_int", 12)
 >>> bg.integer_validator("width", 89)
 
-# Test integer_validator method with invalid type
+# Test integer_validator method with invalid types
 >>> try:
 ...     bg.integer_validator("name", "John")
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [TypeError] name must be an integer
 
-# Test integer_validator method with float
 >>> try:
-...     bg.integer_validator("age", 17.5)
+...     bg.integer_validator("age", 0)
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] age must be an integer
+[ValueError] age must be greater than 0
 
-# Test integer_validator method with negative value
 >>> try:
 ...     bg.integer_validator("distance", -4)
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
 [ValueError] distance must be greater than 0
 
-# Test integer_validator method with zero
->>> try:
-...     bg.integer_validator("year", 0)
-... except Exception as e:
-...     print("[{}] {}".format(e.__class__.__name__, e))
-[ValueError] year must be greater than 0
+# Test with various data types
+>>> for test_case in [("average", 7.8), ("list", [1, 2, 3]), ("dict", {"key": "value"}),
+...                   ("tuple", (1, 2)), ("set", {1, 2, 3}), ("bool", True), ("none", None)]:
+...     try:
+...         bg.integer_validator(*test_case)
+...     except Exception as e:
+...         print("[{}] {} must be an integer".format(e.__class__.__name__, test_case[0]))
+[TypeError] average must be an integer
+[TypeError] list must be an integer
+[TypeError] dict must be an integer
+[TypeError] tuple must be an integer
+[TypeError] set must be an integer
+[TypeError] bool must be an integer
+[TypeError] none must be an integer
 
-# Test integer_validator method with None
+# Test edge cases
 >>> try:
-...     bg.integer_validator("age", None)
+...     bg.integer_validator("infinity", float('inf'))
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] age must be an integer
+[TypeError] infinity must be an integer
 
-# Test integer_validator method without arguments
 >>> try:
-...     bg.integer_validator()
+...     bg.integer_validator("nan", float('nan'))
 ... except Exception as e:
 ...     print("[{}] {}".format(e.__class__.__name__, e))
-[TypeError] BaseGeometry.integer_validator() missing 2 required positional arguments: 'name' and 'value'
+[TypeError] nan must be an integer
+
+>>> bg.integer_validator("max int", 2**31 - 1)
+
+>>> try:
+...     bg.integer_validator("min int", -2**31)
+... except Exception as e:
+...     print("[{}] {}".format(e.__class__.__name__, e))
+[ValueError] min int must be greater than 0
+
+# Test docstrings
+>>> print(BaseGeometry.__doc__)
+A base class for geometry-related operations.
