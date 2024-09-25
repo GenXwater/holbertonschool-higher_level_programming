@@ -9,9 +9,10 @@ class VerboseList(list):
     A custom list class that provides verbose output for certain operations.
     This class extends the built-in list class with additional printing functionality.
     """
+
     def __init__(self, list):
         super().__init__(list)
-    
+
     def append(self, obj):
         super().append(obj)
         print("Added [{}] to the list.".format(obj))
