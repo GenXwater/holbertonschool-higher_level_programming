@@ -6,34 +6,39 @@ This module defines a built-in class list.
 
 class VerboseList(list):
     """
-    A custom list class that provides verbose output for certain operations.
-    This class extends the built-in list class with additional printing functionality.
+    A subclass of Python's built-in list that provides notifications
+    when the list is modified.
+
+    Methods:
+    - append(item)
+    - extend(iterable)
+    - remove(item)
+    - pop(index=-1)
     """
 
-    def __init__(self, list):
-        super().__init__(list)
+    def append(self, item):
+        """Adds an item to the list and prints a notification."""
+        super().append(item)
+        print(f"Added [{item}] to the list.")
 
-    def append(self, obj):
-        super().append(obj)
-        print("Added [{}] to the list.".format(obj))
+    def extend(self, iterable):
+        """
+        Extends the list with the elements from the iterable
+        and prints a notification.
+        """
+        super().extend(iterable)
+        print(f"Extended the list with {len(iterable)} items.")
 
-    def extend(self, obj):
-        length = len(self)
-        super().extend(obj)
-        obj_added = len(self) - length
-        print("Extended the list with [{}] items.".format(obj_added))
+    def remove(self, item):
+        """Removes an item from the list and prints a notification."""
+        print(f"Removed [{item}] from the list.")
+        super().remove(item)
 
-    def remove(self, obj):
-        if obj in self:
-            print("Removed [{}] from the list.".format(obj))
-            super().remove(obj)
-        else:
-            print("Item [{}] not found in the list.".format(obj))
-
-    def pop(self, obj=-1):
-        if self:
-            item = self[obj]
-            print("Popped [{}] from the list.".format(item))
-            return super().pop(obj)
-        else:
-            raise IndexError("pop from empty list")
+    def pop(self, index=-1):
+        """
+        Removes and returns the item at the specified index
+        and prints a notification.
+        """
+        item = self[index]  # Récupère l'élément avant suppression
+        print(f"Popped [{item}] from the list.")
+        return super().pop(index)
