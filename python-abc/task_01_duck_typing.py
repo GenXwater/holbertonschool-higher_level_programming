@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 from abc import ABC, abstractmethod
 import math
+"""
+This module defines a shape.
+"""
 
 
 class Shape(ABC):
