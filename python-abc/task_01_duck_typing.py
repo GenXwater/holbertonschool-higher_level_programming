@@ -56,8 +56,5 @@ class Rectangle(Shape):
 
 
 def shape_info(shape):
-    if hasattr(shape, 'area') and hasattr(shape, 'perimeter'):
-        print("Area: {}".format(shape.area()))
-        print("Perimeter: {}".format(shape.perimeter()))
-    else:
-        print("This object does not have the required methods.")
+    print("Area: {}".format(shape.area()))
+    print("Perimeter: {}".format(shape.perimeter()))
