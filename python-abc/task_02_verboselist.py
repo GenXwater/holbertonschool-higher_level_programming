@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-
-
 from typing import SupportsIndex
 
 
@@ -18,13 +16,21 @@ class VerboseList(list):
         print("Added [{}] to the list.".format(obj))
 
     def extend(self, obj):
+        length = len(self)
         super().extend(obj)
-        print("Extended the list with [{}] items.".format(len(obj)))
+        obj_added = len(self) - length
+        print("Extended the list with [{}] items.".format(obj_added))
 
     def remove(self, obj):
-        super().remove(obj)
-        print("Removed [{}] from the list.".format(obj))
+        if obj in self:
+            super().remove(obj)
+            print("Removed [{}] from the list.".format(obj))
+        else:
+            print("Item [{}] not found in the list.".format(obj))
 
     def pop(self, obj=-1):
-        obj = super().pop(obj)
-        print("Popped [{}] from the list.".format(obj))
+        if self:
+            obj = super().pop(obj)
+            print("Popped [{}] from the list.".format(obj))
+        else:
+            raise IndexError("pop from empty list")
