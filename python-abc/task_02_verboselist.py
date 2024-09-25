@@ -39,6 +39,6 @@ class VerboseList(list):
         Removes and returns the item at the specified index
         and prints a notification.
         """
-        item = self[index]  # Récupère l'élément avant suppression
+        item = self[index]
         print(f"Popped [{item}] from the list.")
         return super().pop(index)
