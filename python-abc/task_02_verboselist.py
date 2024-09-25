@@ -23,14 +23,15 @@ class VerboseList(list):
 
     def remove(self, obj):
         if obj in self:
-            super().remove(obj)
             print("Removed [{}] from the list.".format(obj))
+            super().remove(obj)
         else:
             print("Item [{}] not found in the list.".format(obj))
 
     def pop(self, obj=-1):
         if self:
-            obj = super().pop(obj)
-            print("Popped [{}] from the list.".format(obj))
+            item = self[obj]
+            print("Popped [{}] from the list.".format(item))
+            return super().pop(obj)
         else:
             raise IndexError("pop from empty list")
