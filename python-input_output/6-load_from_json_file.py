@@ -6,6 +6,7 @@ Learn JSON
 
 import json
 
+
 def load_from_json_file(filename):
     """
     Args:
@@ -13,5 +14,5 @@ def load_from_json_file(filename):
     Return:
     object: A Python object created from the JSON file
     """
-    with open(filename, 'r') as f:
+    with open(filename, "r") as f:
         return json.load(f)

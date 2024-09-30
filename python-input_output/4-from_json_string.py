@@ -6,6 +6,7 @@ Module for load the JSON file
 
 import json
 
+
 def from_json_string(my_str):
     """
     Args:
