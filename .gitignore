@@ -104,3 +104,6 @@ python-input_output/my_dict.json
 python-input_output/my_list.json
 python-input_output/my_set.json
 python-input_output/__pycache__/5-save_to_json_file.cpython-310.pyc
+python-input_output/__pycache__/6-load_from_json_file.cpython-310.pyc
+python-input_output/6-main.py
+python-input_output/my_fake.json
