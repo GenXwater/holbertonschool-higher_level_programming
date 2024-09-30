@@ -22,10 +22,10 @@ class Student:
         If attrs is a list of strings only the specified attributes ar included
         Otherwise, all attributes are included.
         """
-        if isinstance(attrs) == list:
+        if isinstance(attrs, list):
             stud_dict = {}
             for item in attrs:
-                if isinstance(item) == str:
+                if isinstance(item, str):
                     if item == "first_name":
                         stud_dict["first_name"] = self.first_name
                     elif item == "last_name":
