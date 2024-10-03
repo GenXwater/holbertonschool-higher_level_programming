@@ -3420,3 +3420,7 @@ python-input_output/__pycache__/0-read_file.cpython-310.pyc
 python-input_output/__pycache__/11-student.cpython-310.pyc
 python-input_output/12-main.py
 python-input_output/__pycache__/12-pascal_triangle.cpython-310.pyc
+python-serialization/data.json
+python-serialization/0-main.py
+data.json
+python-serialization/__pycache__/task_00_basic_serialization.cpython-310.pyc
