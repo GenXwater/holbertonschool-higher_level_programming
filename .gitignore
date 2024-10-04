@@ -3424,3 +3424,6 @@ python-serialization/data.json
 python-serialization/0-main.py
 data.json
 python-serialization/__pycache__/task_00_basic_serialization.cpython-310.pyc
+python-serialization/1-main.py
+object.pkl
+python-serialization/__pycache__/task_01_pickle.cpython-310.pyc
