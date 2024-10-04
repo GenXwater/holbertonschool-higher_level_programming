@@ -1,4 +1,8 @@
+#!/usr/bin/env python3
+
+
 import pickle
+
 
 class CustomObject:
     def __init__(self, name, age, is_student):
@@ -19,4 +23,3 @@ class CustomObject:
     def deserialize(cls, filename):
         with open(filename, 'rb') as file:
             return pickle.load(file)
-
