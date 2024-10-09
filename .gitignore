@@ -3427,3 +3427,7 @@ python-serialization/__pycache__/task_00_basic_serialization.cpython-310.pyc
 python-serialization/1-main.py
 object.pkl
 python-serialization/__pycache__/task_01_pickle.cpython-310.pyc
+restful-api/__pycache__/task_02_requests.cpython-310.pyc
+restful-api/main_02_requests.py
+restful-api/posts.csv
+posts.csv
