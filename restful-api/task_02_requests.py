@@ -14,8 +14,6 @@ def fetch_and_print_posts():
             print(f"Status Code: {response.status_code}")
             for title in response.json():
                  print(title["title"])
-    else:
-         print(f"Error: {response.status_code}")
 
 
 def fetch_and_save_posts():
@@ -43,3 +41,4 @@ def fetch_and_save_posts():
                     "title": post["title"],
                     "body": post["body"]}
             )
+ 
