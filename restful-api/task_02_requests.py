@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Fetch and print and save"""
 
 
 import csv
