@@ -6,6 +6,7 @@ import requests
 
 
 def fetch_and_print_posts():
+    """ Fetch and print"""
     response = requests.get("https://jsonplaceholder.typicode.com/posts")
 
     if response.status_code == 200:
@@ -17,6 +18,7 @@ def fetch_and_print_posts():
 
 
 def fetch_and_save_posts():
+    """ Fetch and save"""
     # Récupérer les données JSON de l'API
     response = requests.get("https://jsonplaceholder.typicode.com/posts")
     # Convertir les données JSON en une liste de dictionnaires
