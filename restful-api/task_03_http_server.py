@@ -8,7 +8,7 @@ import json
 PORT = 8000
 
 
-class CustomRequestHandler(http.server.BaseHTTPRequestHandler):
+class Server(http.server.BaseHTTPRequestHandler):
     """
     CustomRequestHandler is a class to handle incoming GET requests
     and respond based on the requested endpoint.
@@ -55,6 +55,6 @@ class CustomRequestHandler(http.server.BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    with http.server.HTTPServer(("", PORT), CustomRequestHandler) as httpd:
+    with http.server.HTTPServer(("", PORT), Server) as httpd:
         print(f"Serving on port {PORT}...")
         httpd.serve_forever()
