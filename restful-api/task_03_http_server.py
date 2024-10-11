@@ -3,9 +3,9 @@ import http.server
 import json
 
 
-class RequestHandler(http.server.BaseHTTPRequestHandler):
+class Server(http.server.BaseHTTPRequestHandler):
     """
-    RequestHandler to manage GET requests.
+    Server to manage GET requests.
     Handles the following endpoints:
     - '/' : returns a greeting message.
     - '/data' : returns a sample JSON response.
@@ -60,7 +60,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
 
 # Configure the server
 server_address = ('', 8000)  # Listen on port 8000
-httpd = http.server.HTTPServer(server_address, RequestHandler)
+httpd = http.server.HTTPServer(server_address, Server)
 
 # Start the server
 httpd.serve_forever()
