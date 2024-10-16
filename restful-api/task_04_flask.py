@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Flask"""
 
+
 from flask import Flask, jsonify, request
 
 
@@ -10,21 +11,25 @@ users = {"jane": {"name": "Jane", "age": 28, "city": "Los Angeles"}}
 
 @app.route("/")
 def home():
+    """Flask"""
     return 'Welcome to the Flask API!'
 
 
 @app.route("/data")
 def list_all_users():
+    """Flask"""
     return jsonify(list(users.keys()))
 
 
 @app.route("/status")
 def return_status():
+    """Flask"""
     return 'ok'
 
 
 @app.route("/users/<username>")
 def give_user_info(username):
+    """Flask"""
     if not users.get(username):
         return jsonify({"error": "User not found"}), 404
     return users[username]
@@ -32,6 +37,7 @@ def give_user_info(username):
 
 @app.route("/add_user", methods=["POST"])
 def create_user():
+    """Flask"""
     new_user = request.get_json()
     new_username = new_user.get('username')
 
