@@ -5,10 +5,9 @@ import http.server
 import json
 
 PORT = 8000
-Handler = http.server.BaseHTTPRequestHandler
 
 
-class Server(Handler):
+class Server(http.server.BaseHTTPRequestHandler):
     """
     CustomRequestHandler is a class to handle incoming GET requests
     and respond based on the requested endpoint.
