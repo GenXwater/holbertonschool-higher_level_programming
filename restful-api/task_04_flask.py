@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""Flask"""
 
 from flask import Flask, jsonify, request
 
