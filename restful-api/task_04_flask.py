@@ -24,7 +24,7 @@ def list_all_users():
 @app.route("/status")
 def return_status():
     """Flask put more words"""
-    return 'ok'
+    return 'OK'
 
 
 @app.route("/users/<username>")
