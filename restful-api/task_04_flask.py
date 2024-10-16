@@ -1,35 +1,35 @@
 #!/usr/bin/python3
-"""Flask"""
+"""Flask put more words"""
 
 
 from flask import Flask, jsonify, request
 
 
 app = Flask(__name__)
-users = {"jane": {"name": "Jane", "age": 28, "city": "Los Angeles"}}
+users = {}
 
 
 @app.route("/")
 def home():
-    """Flask"""
+    """Flask put more words"""
     return 'Welcome to the Flask API!'
 
 
 @app.route("/data")
 def list_all_users():
-    """Flask"""
+    """Flask put more words"""
     return jsonify(list(users.keys()))
 
 
 @app.route("/status")
 def return_status():
-    """Flask"""
+    """Flask put more words"""
     return 'ok'
 
 
 @app.route("/users/<username>")
 def give_user_info(username):
-    """Flask"""
+    """Flask put more words"""
     if not users.get(username):
         return jsonify({"error": "User not found"}), 404
     return users[username]
@@ -37,7 +37,7 @@ def give_user_info(username):
 
 @app.route("/add_user", methods=["POST"])
 def create_user():
-    """Flask"""
+    """Flask put more words"""
     new_user = request.get_json()
     new_username = new_user.get('username')
 
