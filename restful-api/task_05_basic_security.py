@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 """Flask put more words"""
 
-
-from flask import request
-from flask import Flask, jsonify
+from flask import request, Flask, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_httpauth import HTTPBasicAuth
 from flask_jwt_extended import (
@@ -47,6 +45,12 @@ def verify_password(username, password):
     return None
 
 
+@app.route('/')  # Ajout de la route racine
+def home():
+    """welcome message."""
+    return "Welcome to the Flask API!"  # Retourne un message de bienvenue
+
+
 @app.route('/basic-protected')
 # Décorateur qui exige une authentification pour accéder à cette route
 @auth.login_required
@@ -61,6 +65,10 @@ def login():
     # (JSON contenant 'username' et 'password')
     username = request.json.get('username', None)
     password = request.json.get('password', None)
+
+    # Ajout de la validation pour vérifier si username ou password sont absents
+    if not username or not password:
+        return jsonify({"message": "Missing username or password"}), 400
 
     # On vérifie si l'utilisateur existe et si le mot de passe est correct.
     user = users.get(username)
