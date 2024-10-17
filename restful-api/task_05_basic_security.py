@@ -112,5 +112,46 @@ def admin_only():
     return jsonify(message="Admin Access: Granted")
 
 
+# Ajout des gestionnaires d'erreurs pour JWT
+@jwt.unauthorized_loader
+def handle_unauthorized_error(err):
+    """Handle unauthorized access attempts."""
+    return jsonify({
+        "error": "Missing or invalid token", "description": str(err)
+        }), 401
+
+
+@jwt.invalid_token_loader
+def handle_invalid_token_error(err):
+    """Handle invalid token errors."""
+    return jsonify({
+        "error": "Invalid token", "description": str(err)
+        }), 401
+
+
+@jwt.expired_token_loader
+def handle_expired_token_error(err):
+    """Handle expired token errors."""
+    return jsonify({
+        "error": "Token has expired", "description": str(err)
+        }), 401
+
+
+@jwt.revoked_token_loader
+def handle_revoked_token_error(err):
+    """Handle revoked token errors."""
+    return jsonify({
+        "error": "Token has been revoked", "description": str(err)
+        }), 401
+
+
+@jwt.needs_fresh_token_loader
+def handle_needs_fresh_token_error(err):
+    """Handle cases where a fresh token is required."""
+    return jsonify({
+        "error": "Fresh token required", "description": str(err)
+        }), 401
+
+
 if __name__ == '__main__':
     app.run(debug=True)
