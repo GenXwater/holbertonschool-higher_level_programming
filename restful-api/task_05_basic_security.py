@@ -8,19 +8,6 @@ from flask_jwt_extended import (
     JWTManager,
 )
 
-"""
-JWTManager : pour initialiser le système JWT dans notre application.
-create_access_token : pour générer un jeton lorsque l’utilisateur se connecte.
-jwt_required : pour protéger les routes.
-get_jwt_identity : obtenir l’identité de l’utilisateur à partir du jeton JWT.
-"""
-
-# Initialise une instance de Flask qui sera notre application
-app = Flask(__name__)
-auth = HTTPBasicAuth()
-app.config["JWT_SECRET_KEY"] = "secret_key"  # Définis une clé secrète pour signer les JWT
-jwt = JWTManager(app)  # Initialise JWTManager avec notre application Flask
-
 
 users = {
     "user1": {
@@ -35,117 +22,113 @@ users = {
     }
 }
 
-# Ajout de la route racine
-@app.route("/")
-def home():
-    """Message de bienvenue."""
-    return "Welcome to the Flask API!"  # Retourne un message de bienvenue
+
+app = Flask(__name__)  # Instance of Flask (our application)
+auth = HTTPBasicAuth()
 
 
 @auth.verify_password
 def verify_password(username, password):
-    """Vérifie si le mot de passe correspond."""
+    """Verify the username and password with the existing user data."""
     user = users.get(username)
     if user and check_password_hash(user["password"], password):
-        return username  # Retourne le nom d'utilisateur si tout est correct
+        return username
     return None
 
 
+@app.route("/")
+def home():
+    """welcome message."""
+    return "Welcome to the Flask API!"
+
+
 @app.route("/basic-protected", methods=['GET'])
-@auth.login_required  # Cette route nécessite une authentification pour être accessible
+@auth.login_required
 def basic_protected():
-    """Retourne un message si l'authentification basique est réussie."""
-    return "Basic Auth: Access Granted"  # On retourne un message si l'authentification est réussie
+    """Return a message if basic authentication is done with success."""
+    return "Basic Auth: Access Granted"
+
+
+app.config["JWT_SECRET_KEY"] = "secret_key"
+jwt = JWTManager(app)
 
 
 @app.route("/login", methods=["POST"])
 def login():
-    """
-    Authentifie l'utilisateur et retourne un JWT si c'est réussi.
-    """
-    # Récupère les données envoyées dans la requête (JSON contenant 'username' et 'password')
+    """Authenticate user and return a JWT if successful."""
     username = request.json.get("username", None)
     password = request.json.get("password", None)
 
-    # Ajout de la validation pour vérifier si username ou password sont absents
     if not username or not password:
         return jsonify({"message": "Missing username or password"}), 400
 
-    # On vérifie si l'utilisateur existe et si le mot de passe est correct
     user = users.get(username)
     if user and check_password_hash(user["password"], password):
-        # Si l'utilisateur est authentifié, on crée un jeton JWT pour lui
         access_token = create_access_token(identity=username)
-        return jsonify(access_token=access_token), 200  # Retourne le jeton JWT dans la réponse
+        return jsonify(access_token=access_token), 200
     else:
         return jsonify({"message": "Bad username or password"}), 401
 
 
 @app.route("/jwt-protected", methods=['GET'])
-@jwt_required()  # Cette route nécessite un jeton JWT valide pour être accessible
+@jwt_required()
 def jwt_protected():
-    """Retourne un message si l'authentification JWT est réussie."""
-    current_user = get_jwt_identity()  # Récupère l'identité de l'utilisateur à partir du jeton JWT
-    return f"JWT Auth: Access Granted for {current_user}"
+    """Return a message if JWT authentication is successful."""
+    return "JWT Auth: Access Granted"
 
 
 @app.route("/admin-only", methods=['GET'])
-@jwt_required()  # La route est protégée par JWT
+@jwt_required()
 def admin_only():
-    """
-    Retourne un message si l'utilisateur actuel est un administrateur.
-    """
-    current_user = get_jwt_identity()  # Récupère l'identité de l'utilisateur à partir du jeton JWT
+    """Return a message if the current user is an admin."""
+    current_user = get_jwt_identity()
 
     if current_user not in users:
-        return jsonify({"error": "User not found"}), 404  # Retourne une erreur si l'utilisateur n'existe pas
+        return jsonify({"error": "User not found"}), 404
 
-    # Vérifie si l'utilisateur a un rôle d'administrateur
     if users[current_user]['role'] != 'admin':
-        return jsonify({"error": "Admin access required"}), 403  # Retourne une erreur si l'accès admin est requis
-
+        return jsonify({"error": "Admin access required"}), 403
     return "Admin Access: Granted"
 
 
-# Gestion des erreurs pour JWT
 @jwt.unauthorized_loader
 def handle_unauthorized_error(err):
-    """Gère les tentatives d'accès non autorisées."""
+    """Handle unauthorized access attempts."""
     return jsonify({
         "error": "Missing or invalid token", "description": str(err)
-    }), 401
+        }), 401
 
 
 @jwt.invalid_token_loader
 def handle_invalid_token_error(err):
-    """Gère les erreurs de jeton invalide."""
+    """Handle invalid token errors."""
     return jsonify({
         "error": "Invalid token", "description": str(err)
-    }), 401
+        }), 401
 
 
 @jwt.expired_token_loader
 def handle_expired_token_error(err):
-    """Gère les erreurs de jeton expiré."""
+    """Handle expired token errors."""
     return jsonify({
         "error": "Token has expired", "description": str(err)
-    }), 401
+        }), 401
 
 
 @jwt.revoked_token_loader
 def handle_revoked_token_error(err):
-    """Gère les erreurs de jeton révoqué."""
+    """Handle revoked token errors."""
     return jsonify({
         "error": "Token has been revoked", "description": str(err)
-    }), 401
+        }), 401
 
 
 @jwt.needs_fresh_token_loader
 def handle_needs_fresh_token_error(err):
-    """Gère les cas où un jeton frais est requis."""
+    """Handle cases where a fresh token is required."""
     return jsonify({
         "error": "Fresh token required", "description": str(err)
-    }), 401
+        }), 401
 
 
 if __name__ == '__main__':
