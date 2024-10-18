@@ -36,6 +36,13 @@ users = {
 }
 
 
+
+@app.route('/')  # Ajout de la route racine
+def home():
+    """welcome message."""
+    return "Welcome to the Flask API!"  # Retourne un message de bienvenue
+
+
 @auth.verify_password  # vérif si un nom d'utilisateur et un mdp sont valides
 def verify_password(username, password):
     user = users.get(username)
@@ -43,12 +50,6 @@ def verify_password(username, password):
     if user and check_password_hash(user['password'], password):
         return username  # Retourne le nom d'utilisateur si tout est correct
     return None
-
-
-@app.route('/')  # Ajout de la route racine
-def home():
-    """welcome message."""
-    return "Welcome to the Flask API!"  # Retourne un message de bienvenue
 
 
 @app.route('/basic-protected')
@@ -154,4 +155,4 @@ def handle_needs_fresh_token_error(err):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
