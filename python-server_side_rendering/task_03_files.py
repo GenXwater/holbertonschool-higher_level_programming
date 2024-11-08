@@ -1,11 +1,64 @@
+#!/usr/bin/python3
+from flask import Flask, render_template, request
 import json
-from flask import Flask, render_template
+import csv
+
 
 app = Flask(__name__)
+
+def read_json_file(filepath):
+    with open(filepath, 'r') as file:
+        data = json.load(file)
+    return data
+
+def read_csv_file(filepath):
+    products = []
+    with open(filepath, 'r') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            try:
+                row['id'] = int(row.get('id', 0))
+                row['price'] = float(row.get('price', 0.0))
+            except ValueError:
+                row['id'] = 0
+                row['price'] = 0.0
+
+            row['name'] = row.get('name', 'N/A')
+            row['category'] = row.get('category', 'N/A')
+            products.append(row)
+    return products
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/items')
+def items():
+    with open('items.json') as json_file:
+        data = json.load(json_file)
+        items_list = data.get("items", [])
+
+    return render_template('items.html', items=items_list)
+
+@app.route('/products')
+def display_products():
+    source = request.args.get('source')
+    product_id = request.args.get('id', type=int)
+
+    if source == "json":
+        products = read_json_file('products.json')
+    elif source == "csv":
+        products = read_csv_file('products.csv')
+    else:
+        return render_template('product_display.html', error="Wrong source. Please specify 'json' or 'csv'.")
+
+    if product_id:
+        products = [product for product in products if product.get("id") == product_id]
+        if not products:
+            return render_template('product_display.html', error="Product not found.")
+
+    return render_template('product_display.html', products=products)
+
 
 @app.route('/about')
 def about():
@@ -14,59 +67,6 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
-
-@app.route('/items')
-def items():
-    # Charger les données depuis le fichier JSON
-    with open('items.json', 'r') as file:
-        data = json.load(file)
-    # Passer la liste d'items au template
-    items_list = data.get("items", [])
-    return render_template('items.html', items=items_list)
-
-def read_json(file_path):
-    try:
-        with open(file_path, 'r') as file:
-            data = json.load(file)
-        return data
-    except Exception as e:
-        print(f"Error reading JSON file: {e}")
-        return []
-
-def read_csv(file_path):
-    products = []
-    try:
-        with open(file_path, 'r') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                row["id"] = int(row["id"])
-                row["price"] = float(row["price"])
-                products.append(row)
-        return products
-    except Exception as e:
-        print(f"Error reading CSV file: {e}")
-        return []
-
-@app.route('/products')
-def products():
-    source = request.args.get('source')
-    product_id = request.args.get('id', type=int)
-
-    # Lire les données en fonction de la source
-    if source == "json":
-        products = read_json("products.json")
-    elif source == "csv":
-        products = read_csv("products.csv")
-    else:
-        return render_template("product_display.html", error="Wrong source")
-
-    # Filtrer les produits par ID si un ID est fourni
-    if product_id:
-        products = [product for product in products if product.get("id") == product_id]
-        if not products:
-            return render_template("product_display.html", error="Product not found")
-    
-    return render_template("product_display.html", products=products)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
